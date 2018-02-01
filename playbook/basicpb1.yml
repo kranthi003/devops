@@ -1,0 +1,10 @@
+---
+- hosts: web
+  remote_user: root
+  tasks:
+  - yum: name=wget state=present
+
+- hosts: db
+  remote_user: root
+  tasks: 
+  - yum: name=httpd state=present

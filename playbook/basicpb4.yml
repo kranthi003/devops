@@ -1,0 +1,29 @@
+---
+- hosts: web
+  remote_user: root
+  roles:
+      - httpd
+      - php
+  tasks:
+   # - name: 'install php package'
+    #  yum: name=php state=present
+    #- name: 'instal php package and driver'
+     # yum: name={{ item }} state=present
+      #with_items:
+      #    - php
+      #    - php-mysql
+      #    - tar
+      #    - unzip
+    - name: 'enabling httpd service'
+      service: name=httpd state=started enabled=yes
+    - name: 'get url'
+      get_url: url=https://wordpress.org/latest.tar.gz dest=/opt
+    - name: 'un  archiving package'
+      unarchive: src=/opt/wordpress-4.9.2.tar.gz dest=/var/www/html copy=no
+      remote_src: true
+
+- hosts: db
+  remote_user: root
+  become: true
+  roles:
+    - mariadb

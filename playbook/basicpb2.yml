@@ -1,0 +1,26 @@
+- hosts: web
+  remote_user: root
+  roles:
+        - httpd
+  tasks:
+  #  - yum: name=httpd state=present
+   # - service: name=httpd state=started
+   # - group: name=devops state=present
+    #- user: name=testuser1 state=present groups=devops
+    #- yum: name={{item}} state=present
+    #  with_items:
+     #  - wget
+     #  - httpd
+      # - git
+
+- hosts: db
+  remote_user: root
+  tasks:
+     - user: name=kranthi2 state=present groups=devops
+     - user: name=testuser1 state=present groups=devops  
+     - yum: name={{ item }} state=present
+       with_items:
+       #- httpd
+       - wget
+       #- git
+       #- status

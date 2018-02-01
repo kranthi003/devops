@@ -1,0 +1,10 @@
+---
+- hosts: db
+  remote_user: root
+ # roles: 
+ #   - httpd
+#  vars:
+#    - port: 8080
+  tasks:
+    - yum: name=git state=present
+    - git: repo=https://github.com/demoglot/html-samples-doctor dest=/var/www/html
